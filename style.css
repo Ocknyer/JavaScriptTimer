@@ -1,0 +1,144 @@
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: radial-gradient(96.74% 276.79% at 3.59% 5.28%, #F0F4FF 0%, #A5B6EE 100%);
+    background-size: cover;
+}
+
+img {
+    vertical-align: top;
+}
+
+#app {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 72px;
+}
+
+#app .main-timer {
+    width: 400px;
+    height: 360px;
+    border-radius: 16px;
+    margin-top: 60px;
+    background: linear-gradient(144.07deg, #5572BB 2.13%, #374B7C 102.97%);
+    box-shadow: 20px 20px 60px 10px #374B7C66;
+    padding: 48px 58px 40px;
+    text-align: center;
+}
+
+.main-timer .tit-timer {
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+}
+
+.main-timer .line {
+    height: 1px;
+    width: 312px;
+    color: #3d538a;
+    margin: 23px 0 33px;
+}
+
+.main-timer .txt-time,
+.main-timer .div-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.main-timer .txt-time {
+    font-size: 12px;
+    color: #A5B6EE;
+    margin-bottom: 4px;
+}
+
+.main-timer .HRS,
+.main-timer .MIN,
+.main-timer .SEC {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #354971;
+    border-radius: 4px;
+    background: linear-gradient(314.28deg, #304577 0%, #4C65A0 83%),
+linear-gradient(0deg, #354971, #354971);
+    text-align: center;
+    line-height: 80px;
+    font-size: 40px;
+    color: #fff;
+    font-weight: 700;
+}
+
+.main-timer .img-dot {
+    width: 6px;
+    height: 26px;
+}
+
+.main-timer .btn-start,
+.main-timer .btn-reset {
+    width: 112px;
+    height: 48px;
+    background-color: #324577;
+    border: none;
+    border-radius: 50px;
+    margin-top: 40px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #617199;
+}
+
+.main-timer .btn-start {
+    margin-right: 12px;
+}
+
+.img-start,
+.img-reset {
+    margin-right: 6px;
+}
+
+.img-btn.active {
+    color: #fff;
+}
+
+.btn-start.active {
+    color: #fff;
+    background-color: #5180ff;
+}
+
+.btn-reset.active {
+    color: #fff;
+    background-color: #fb7099;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#app .footer {
+    margin-top: 60px;
+    font-size: 14px;
+    color: #8596bf;
+}
