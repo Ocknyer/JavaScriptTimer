@@ -4,6 +4,7 @@ const timeHrs = document.querySelector('.HRS')
 const timeMin = document.querySelector('.MIN')
 const timeSec = document.querySelector('.SEC')
 
+
 // timeHrs.addEventListener('click', (e) => {
 //     const hrs = timeHrs.innerHTML
 //     hrs += 1;
@@ -24,8 +25,12 @@ timeSec.addEventListener('click', (e) => {
 })
 
 btnStart.addEventListener('click', (e) => {
-    setTimeout(function () {
-        timeSec.value -= 1
-        timeSec.innerHTML = `${timeSec.value}`
-    }, 1000)
+        btnStart.style.background = '#15c2b8'
+        btnStart.innerHTML = `
+        <img src="img/icon-stop.png" alt="" class="img-start">PAUSE
+        `
+        setInterval(function () {
+            timeSec.value -= 1
+            timeSec.innerHTML = `${timeSec.value}`
+        }, 1000)
 })
