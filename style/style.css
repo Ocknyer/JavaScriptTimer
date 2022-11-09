@@ -13,7 +13,7 @@
 
 body {
     background: radial-gradient(96.74% 276.79% at 3.59% 5.28%, #F0F4FF 0%, #A5B6EE 100%);
-    background-size: cover;
+    height: 100vh;
 }
 
 img {
@@ -22,7 +22,6 @@ img {
 
 #app {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     align-items: center;
     margin-top: 72px;
@@ -35,7 +34,7 @@ img {
     margin-top: 60px;
     background: linear-gradient(144.07deg, #5572BB 2.13%, #374B7C 102.97%);
     box-shadow: 20px 20px 60px 10px #374B7C66;
-    padding: 48px 58px 40px;
+    padding: 48px 44px 40px;
     text-align: center;
 }
 
@@ -43,25 +42,39 @@ img {
     font-size: 24px;
     font-weight: 700;
     color: #fff;
-    text-align: center;
 }
 
 .main-timer .line {
     height: 1px;
     width: 312px;
-    color: #3d538a;
+    background-color: #3d538a;
     margin: 23px 0 33px;
+    position: relative;
 }
 
-.main-timer .txt-time,
+.main-timer .line::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 312px;
+    background-color: #5B75B4;
+    position: absolute;
+    top: 1px;
+}
+
 .main-timer .div-time {
     display: flex;
-    flex-direction: row;
+    justify-content: space-around;
+}
+
+.main-timer .txt-time {
+    display: flex;
+    flex-direction: column;
     justify-content: space-around;
     align-items: center;
 }
 
-.main-timer .txt-time {
+.main-timer .txt-time p {
     font-size: 12px;
     color: #A5B6EE;
     margin-bottom: 4px;
@@ -74,9 +87,7 @@ img {
     height: 80px;
     border: 1px solid #354971;
     border-radius: 4px;
-    background: linear-gradient(314.28deg, #304577 0%, #4C65A0 83%),
-linear-gradient(0deg, #354971, #354971);
-    text-align: center;
+    background: linear-gradient(314.28deg, #304577 0%, #4C65A0 83%),linear-gradient(0deg, #354971, #354971);
     line-height: 80px;
     font-size: 40px;
     color: #fff;
@@ -86,19 +97,21 @@ linear-gradient(0deg, #354971, #354971);
 .main-timer .img-dot {
     width: 6px;
     height: 26px;
+    position: relative;
+    top: 44px;
 }
 
 .main-timer .btn-start,
 .main-timer .btn-reset {
     width: 112px;
     height: 48px;
-    background-color: #324577;
     border: none;
     border-radius: 50px;
-    margin-top: 40px;
     font-size: 14px;
     font-weight: 700;
+    margin-top: 40px;
     color: #617199;
+    background-color: #324577;
 }
 
 .main-timer .btn-start {
@@ -123,19 +136,6 @@ linear-gradient(0deg, #354971, #354971);
     color: #fff;
     background-color: #fb7099;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #app .footer {
     margin-top: 60px;

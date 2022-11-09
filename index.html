@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>타이머 구현</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 <body>
 
@@ -18,17 +18,21 @@
             <h2 class="tit-timer">TIMER</h2>
             <div class="line"></div>
 
-            <section class="txt-time">
-                <p>HRS</p>
-                <p>MIN</p>
-                <p>SEC</p>
-            </section>
             <section class="div-time">
-                <div class="HRS">00</div>
+                <div class="txt-time">
+                    <p>HRS</p>
+                    <div class="HRS"></div>
+                </div>
                 <img src="img/dot.png" alt="" class="img-dot">
-                <div class="MIN">00</div>
+                <div class="txt-time">
+                    <p>MIN</p>
+                    <div class="MIN"></div>
+                </div>
                 <img src="img/dot.png" alt="" class="img-dot">
-                <div class="SEC">00</div>
+                <div class="txt-time">
+                    <p>SEC</p>
+                    <div class="SEC"></div>
+                </div>
             </section>
 
             <button class="btn-start">
