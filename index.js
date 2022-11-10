@@ -5,8 +5,51 @@ const btnStart = document.querySelector('.btn-start');
 const btnReset = document.querySelector('.btn-reset');
 const imgStart = document.querySelector('.img-start')
 const imgReset = document.querySelector('.img-reset')
-const btnStop = document.querySelector('.btn-stop')
 
+const resetTimer = () => {
+    clearInterval(timer);
+
+    time = 0;
+    timeHrs = 0;
+    timeMin = 0;
+    timeSec = 0;
+
+    btnStart.disabled = true;
+    btnReset.disabled = true;
+    btnStart.classList.remove('active', 'pause')
+    btnReset.classList.remove('active')
+
+    imgStart.setAttribute('src', '/img/icon-start-disabled.png')
+    imgReset.setAttribute('src', '/img/icon-reset-disabled.png')
+
+    btnHrs.textContent = (timeHrs + '').padStart(2, "0");
+    btnMin.textContent = (timeMin + '').padStart(2, "0");
+    btnSec.textContent = (timeSec + '').padStart(2, "0");
+};
+
+
+function setBtn() {
+    if (btnStart.classList.contains('active')) {
+        btnStart.classList.replace('active', 'pause')
+        btnStart.innerHTML = `
+        <img src="img/icon-stop.png" alt="" class="img-start">PAUSE
+        `
+    } else if (btnStart.classList.contains('pause')) {
+        btnStart.classList.replace('pause', 'active')
+        btnStart.innerHTML = `
+        <img src="img/icon-start.png" alt="" class="img-start">START
+        `
+    }
+
+    if (btnStart.disabled === true && btnReset.disabled === true) {
+        btnReset.innerHTML = `
+        <img src="img/icon-reset-disabled.png" alt="" class="img-reset">RESET
+        `
+        btnStart.innerHTML = `
+        <img src="img/icon-start-disabled.png" alt="" class="img-start">START
+        `
+    }
+}
 
 let time = 0;
 let timer;
@@ -18,10 +61,10 @@ btnHrs.textContent = (timeHrs + '').padStart(2, "0");
 btnMin.textContent = (timeMin + '').padStart(2, "0");
 btnSec.textContent = (timeSec + '').padStart(2, "0");
 
-if (time === 0) {
-    btnStart.disabled = true;
-    btnReset.disabled = true;
-}
+// if (time === 0) {
+//     btnStart.disabled = true;
+//     btnReset.disabled = true;
+// }
 
 function startTimer() {
     timer = setInterval(() => {
@@ -29,8 +72,8 @@ function startTimer() {
         timeSec--;
 
         if (timeSec < 10) {
-            btnSec.textContent = `0 + ${timeSec})`
-            // btnSec.textContent = (timeSec + '').padStart(2, '0');
+            // btnSec.textContent = '0' + timeSec;
+            btnSec.textContent = (timeSec + '').padStart(2, '0');
         } else {
             btnSec.textContent = timeSec;
         }
@@ -39,7 +82,7 @@ function startTimer() {
             timeMin--;
 
             if (timeMin < 10) {
-                btnMin.textContent = `0 + ${timeMin})`
+                btnMin.textContent = '0' + timeMin;
             } else {
                 btnMin.textContent = timeMin;
             }
@@ -52,7 +95,7 @@ function startTimer() {
             timeMin--;
 
             if (timeMin < 10) {
-                btnMin.textContent = `0 + ${timeMin})`
+                btnMin.textContent = '0' + timeMin;
             } else {
                 btnMin.textContent = timeMin;
             }
@@ -61,11 +104,11 @@ function startTimer() {
             btnSec.textContent = timeSec;
         }
 
-        if (timeSec < 1 && timeMin < 1 && timeHour >= 1) {
-            timeHour--;
+        if (timeSec < 1 && timeMin < 1 && timeHrs >= 1) {
+            timeHrs--;
 
             if (timeHrs < 10) {
-                btnHrs.textContent = `0 + ${timeHrs})`
+                btnHrs.textContent = '0' + timeHrs;
             } else {
                 btnHrs.textContent = timeHrs;
             }
@@ -79,31 +122,13 @@ function startTimer() {
               
         if (timeHrs === 0 && timeMin === 0 && timeSec === 0) {
             clearInterval(timer);
+            resetTimer()
+            setBtn()
 
             btnStart.disabled = true;
             btnReset.disabled = true;
-            imgStart.setAttribute('src', '/img/icon-start-disabled.png')
-            imgReset.setAttribute('src', '/img/icon-reset-disabled.png')
-            stopBtn.classList.remove("active");
-            startBtn.classList.add("active");
         }
     }, 1000)
-};
-
-
-function resetTimer () {
-    clearInterval(timer);
-    time = 0;
-    timeHrs = 0;
-    timeMin = 0;
-    timeSec = 0;
-    btnStart.disabled = true;
-    btnReset.disabled = true;
-    imgStart.setAttribute('src', '/img/icon-start-disabled.png')
-    imgReset.setAttribute('src', '/img/icon-reset-disabled.png')
-    btnHrs.textContent = (timeHrs + '').padStart(2, "0");
-    btnMin.textContent = (timeMin + '').padStart(2, "0");
-    btnSec.textContent = (timeSec + '').padStart(2, "0");
 };
 
 function setBtnImg (button, time) {
@@ -137,6 +162,8 @@ function addTime(type) {
 }
 
 btnSec.addEventListener('click', () => {
+    btnStart.classList.add('active');
+    btnReset.classList.add('active')
     addTime('sec');
     setBtnImg(btnSec, timeSec);
 });
@@ -152,45 +179,15 @@ btnHrs.addEventListener('click', () => {
 });
 
 btnStart.addEventListener('click', () => {
-    btnStop.classList.add('active');
-    btnStart.classList.remove('active');
-    timerStart();
+    if (btnStart.classList.contains('active')) {
+        startTimer();
+        setBtn();
+    } else if (btnStart.classList.contains('pause')) {
+        clearInterval(timer);
+        setBtn();
+    }
 });
 
 btnReset.addEventListener('click', () => {
-    timerReset();
+    resetTimer();
 });
-
-// btnStop.addEventListener('click', () => {
-//     clearInterval(timer);
-//     btnStop.classList.remove('active');
-//     btnStart.classList.add('active');
-// });
-
-
-
-
-
-
-// btnSec.addEventListener('click', (e) => {
-//     btnSec.value = 10
-//     btnSec.innerHTML = `${btnSec.value}`
-//     btnStart.classList.add('active')
-//     btnReset.classList.add('active')
-
-
-
-//     imgStart.setAttribute('src', 'img/icon-start.png')
-//     imgReset.setAttribute('src', 'img/icon-reset.png')
-// })
-
-// btnStart.addEventListener('click', (e) => {
-//         btnStart.style.background = '#15c2b8'
-//         btnStart.innerHTML = `
-//         <img src="img/icon-stop.png" alt="" class="img-start">PAUSE
-//         `
-//         setInterval(function () {
-//             btnSec.value -= 1
-//             btnSec.innerHTML = `${btnSec.value}`
-//         }, 1000)
-// })

@@ -119,7 +119,8 @@ img {
 }
 
 .img-start,
-.img-reset {
+.img-reset,
+.img-pause {
     margin-right: 6px;
 }
 
@@ -130,6 +131,11 @@ img {
 .btn-start.active {
     color: #fff;
     background-color: #5180ff;
+}
+
+.btn-start.pause {
+    color: #fff;
+    background-color: #15c2b8;
 }
 
 .btn-reset.active {
