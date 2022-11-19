@@ -67,15 +67,15 @@ function startTimer() {
             btnSec.textContent = timeSec;
         }
 
-        // if (timeSec < 1 && timeMin >= 1) {
-        //     timeMin--;
+        if (timeSec < 1 && timeMin >= 1) {
+            timeMin--;
 
-        //     timeMin < 10 ? btnMin.textContent = '0' + timeMin : btnMin.textContent = timeMin;
+            timeMin < 10 ? btnMin.textContent = '0' + timeMin : btnMin.textContent = timeMin;
 
 
-        //     timeSec = 59;
-        //     btnSec.textContent = timeSec;
-        // }
+            timeSec = 59;
+            btnSec.textContent = timeSec;
+        }
 
         if (timeSec < 1 && timeMin < 1 && timeHrs >= 1) {
             timeHrs--;

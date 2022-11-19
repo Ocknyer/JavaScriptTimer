@@ -47,50 +47,94 @@ if (time === 0) {
     btnReset.disabled = true;
 }
 
+// function startTimer() {
+//     timer = setInterval(() => {
+//         time--;
+//         timeSec--;
+//         // timeSec < 10 ? btnSec.value = '0' + timeSec : btnSec.value = timeSec;
+//         btnSec.value < 10 ? btnSec.value = '0' + timeSec : btnSec.value = timeSec;
+
+//         if (timeMin >= 1 && timeSec === 0) {
+//             timeMin--;
+
+//             timeSec = 59;
+
+//             // timeMin < 10 ? btnMin.value = '0' + timeMin : btnMin.value = timeMin;
+//             btnMin.value < 10 ? btnMin.value = '0' + timeMin : btnMin.value = timeMin;
+
+            
+//             btnSec.value = timeSec;
+//         }
+
+//         // if (timeSec < 1 && timeMin >= 1) {
+//         //     timeMin--;
+
+//         //     timeMin < 10 ? btnMin.textContent = '0' + timeMin : btnMin.textContent = timeMin;
+
+
+//         //     timeSec = 59;
+//         //     btnSec.textContent = timeSec;
+//         // }
+
+//         if (timeSec < 1 && timeMin < 1 && timeHrs >= 1) {
+//             timeHrs--;
+
+//             // timeHrs < 10 ? btnHrs.value = '0' + timeHrs : btnHrs.value = timeHrs;
+//             btnHrs.value < 10 ? btnHrs.value = '0' + timeHrs : btnHrs.value = timeHrs;
+        
+
+//             timeMin = 59;
+//             btnMin.value = timeMin;
+//             timeSec = 59;
+//             btnSec.value = timeSec;
+
+//         }
+              
+//         if (timeHrs === 0 && timeMin === 0 && timeSec === 0) {
+//             setTimeout(() => {
+//                 clearInterval(timer);
+//                 resetTimer()
+
+//                 btnStart.disabled = true;
+//                 btnReset.disabled = true;
+//             }, 1000)
+//         }
+//     }, 1000)
+// };
+
 function startTimer() {
     timer = setInterval(() => {
         time--;
         timeSec--;
-        // timeSec < 10 ? btnSec.value = '0' + timeSec : btnSec.value = timeSec;
-        btnSec.value < 10 ? btnSec.value = '0' + timeSec : btnSec.value = timeSec;
+        console.log(time, timeSec, timeMin, timeHrs)
 
-        if (timeMin >= 1 && timeSec === 0) {
-            timeMin--;
+        timeSec < 10 ? btnSec.value = (timeSec + '').padStart(2, "0") : btnSec.value = timeSec;
 
-            timeSec = 59;
-
-            timeMin < 10 ? btnMin.value = '0' + timeMin : btnMin.value = timeMin;
-            btnMin.value < 10 ? btnMin.value = '0' + timeMin : btnMin.value = timeMin;
-
-            
-            btnSec.value = timeSec;
+        if ( timeHrs > 0 && timeMin > 0 && timeSec > 0 ) {
+            btnSec.value = time - (timeMin * 60) - (timeHrs * 3600);            
+            btnMin.value = time - (timeHrs * 3600) - timeSec;
+            btnHrs.value = time / 3600;
+        } else if ( timeHrs === 0 && timeMin > 0 && timeSec > 0 ) {
+            btnSec.value = time - (timeMin * 60);            
+            btnMin.value = (time - timeSec)/60;
+            // btnHrs.value = 0;
+        } else if ( timeHrs === 0 && timeMin === 0 && timeSec > 0 ) {
+            btnSec.value = time;
         }
 
-        // if (timeSec < 1 && timeMin >= 1) {
-        //     timeMin--;
+        if ( time > 60 && timeSec == Number(0)) {
+            timeMin--;
+            timeSec = 59
+        }
 
-        //     timeMin < 10 ? btnMin.textContent = '0' + timeMin : btnMin.textContent = timeMin;
-
-
-        //     timeSec = 59;
-        //     btnSec.textContent = timeSec;
-        // }
-
-        if (timeSec < 1 && timeMin < 1 && timeHrs >= 1) {
+        if ( timeHrs > 0 && timeMin == 0) {
             timeHrs--;
-
-            timeHrs < 10 ? btnHrs.value = '0' + timeHrs : btnHrs.value = timeHrs;
-            btnHrs.value < 10 ? btnHrs.value = '0' + timeHrs : btnHrs.value = timeHrs;
+            timeMin = 59
+        }
+        
         
 
-            timeMin = 59;
-            btnMin.value = timeMin;
-            timeSec = 59;
-            btnSec.value = timeSec;
-
-        }
-              
-        if (timeHrs === 0 && timeMin === 0 && timeSec === 0) {
+        if (timeHrs === 0 && timeMin == 0 && timeSec == 0) {
             setTimeout(() => {
                 clearInterval(timer);
                 resetTimer()
@@ -100,10 +144,10 @@ function startTimer() {
             }, 1000)
         }
     }, 1000)
-};
+}
 
 function setBtn (button, time) {
-    // button.textContent = (time + '').padStart(2, "0");
+    // button.value = (time + '').padStart(2, "0");
     btnStart.disabled = false;
     btnReset.disabled = false;
     btnStart.classList.add('active');
@@ -164,11 +208,6 @@ function getValue() {
         setBtn()
     }
 }
-
-// function setTime() {
-//     timeSec < 10 ? btnSec.textContent = '0' + timeSec : btnSec.textContent = timeSec;
-//     btnSec.value < 10 ? btnSec.textContent = '0' + timeSec : btnSec.textContent = timeSec;
-// }
     
 btnStart.addEventListener('click', () => {
     startTimer();
@@ -185,20 +224,3 @@ btnPause.addEventListener('click', () => {
 btnReset.addEventListener('click', () => {
     resetTimer();
 });
-
-// btnSec.addEventListener('click', () => {
-//     btnStart.classList.add('active');
-//     btnReset.classList.add('active')
-//     addTime('sec');
-//     setBtn(btnSec, timeSec);
-// });
-
-// btnMin.addEventListener('click', () => {
-//     addTime('min');
-//     setBtn(btnMin, timeMin);
-// });
-
-// btnHrs.addEventListener('click', () => {
-//     addTime('hrs');
-//     setBtn(btnHrs, timeHrs);
-// });
